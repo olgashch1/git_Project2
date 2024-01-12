@@ -322,8 +322,9 @@ class MyWidget(QMainWindow):
     def update_result(self):
         cur = self.con.cursor()
         # Получили результат запроса, который ввели в текстовое поле
-        que = "SELECT c.id, c.sort, c.roast, c.grains, c.taste, c.price, c.volume " \
-              "FROM coffe as c ORDER BY c.id DESC"
+        que = "SELECT c.id, c.sort, r.roast, g.grains, c.taste, c.price, c.volume " \
+              "FROM coffe as c JOIN roasts as r ON c.roast = r.id JOIN grain as g " \
+              "ON c.grains = g.id ORDER BY c.id DESC"
         result = cur.execute(que).fetchall()
 
         # Заполнили размеры таблицы
